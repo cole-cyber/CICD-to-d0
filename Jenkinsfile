@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('Code'){
             steps{
-            git url: 'https://github.com/cole-cyber/node-todo-cicdupdate.git', branch: 'master'
+            git url: 'https://github.com/cole-cyber/node-todo-cicdupdate.git', branch: 'Master'
             }
     }
         stage('Build'){
@@ -18,6 +18,12 @@ pipeline {
                     sh 'docker push coledocker11/nodetodo:latest'
                 }
             }
+    }
+        stage('Deploy'){
+            steps{
+                sh "docker-compose down && docker-compose up -d"
+            }
         }
+        
     }
 }
